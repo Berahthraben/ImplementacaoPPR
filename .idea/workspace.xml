@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45dda3dc-262d-4c94-854f-77d1056b8c85" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/venv/Scripts/templates/book-and-pencil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/Scripts/templates/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/controller/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/56763.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/livro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/livros.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/lupa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/share.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/trabalho.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Relatório.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Relatório.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/templates/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/controller/livros.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/templates/book-and-pencil.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/book-and-pencil.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/templatesAssets/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +26,7 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -62,7 +71,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1616776289727</updated>
-      <workItem from="1616776303826" duration="5802000" />
+      <workItem from="1616776303826" duration="6497000" />
+      <workItem from="1616859692787" duration="11842000" />
     </task>
     <servers />
   </component>
@@ -74,7 +84,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
