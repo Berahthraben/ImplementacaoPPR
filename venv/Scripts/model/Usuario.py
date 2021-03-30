@@ -2,8 +2,11 @@ from json import JSONEncoder
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request
 
-from model import Usuario, UsuarioSchema
+from model import Usuario, UsuarioSchema, Endereco
 
+from Endereco import BancoEndereco
+
+app = Flask(__name__)
 db = SQLAlchemy(app)
 
 usuario_schema = UsuarioSchema()
@@ -22,5 +25,6 @@ class BancoUsuario:
 
         db.session.add(novoUsuario)
         db.session.commit()
+        db.session.close()
 
         return jsonify({"status": "successful"})

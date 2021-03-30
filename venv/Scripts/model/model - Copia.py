@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os, enum
+from json import JSONEncoder
 
-from config import ConexaoServidor
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = ConexaoServidor().getConfig()
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:@127.0.0.1:3306/emprestimo_livros"
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -20,8 +20,8 @@ class Usuario(db.Model):
     senha = db.Column(db.String(300), nullable=False)
     idade = db.Column(db.Integer(), nullable=False)
     cpfCnpj = db.Column(db.String(30), nullable=False)
-    endereco = db.relationship('Endereco', backref=db.backref('Usuario',   lazy=True), passive_deletes=True)
-    livro = db.relationship('UsuarioTemLivro', backref=db.backref('Usuario',   lazy=True), passive_deletes=True)
+    endereco = db.relationship('Endereco', backref=db.backref('Usuario',   lazy=True))
+    livro = db.relationship('UsuarioTemLivro', backref=db.backref('Usuario',   lazy=True))
 
     def __init__(self, nome, sobrenome, email, senha, idade, cpfCnpj):
         self.nome = nome
@@ -40,7 +40,7 @@ class Livro(db.Model):
     editora = db.Column(db.String(200), nullable=False)
     preco = db.Column(db.Float(), nullable=False)
     status = db.Column(db.Integer(), nullable=False)
-    usuario = db.relationship('UsuarioTemLivro', backref=db.backref('Livro',   lazy=True), passive_deletes=True)
+    usuario = db.relationship('UsuarioTemLivro', backref=db.backref('Livro',   lazy=True))
 
     def __init__(self, autor, titulo, editora, preco, status):
         self.autor = autor
@@ -53,12 +53,15 @@ class Livro(db.Model):
 class UsuarioTemLivro(db.Model):
     __tablename__ = "UsuarioTemLivro"
     id = db.Column(db.Integer, primary_key=True)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('Usuario.id', ondelete='CASCADE'), nullable=True)
-    livro_id = db.Column(db.Integer, db.ForeignKey('Livro.id', ondelete='CASCADE'), nullable=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('Usuario.id'), nullable=True)
+    livro_id = db.Column(db.Integer, db.ForeignKey('Livro.id'), nullable=True)
 
-    def __init__(self, usuario, livro):
-        self.usuario_id = usuario
-        self.livro_id = livro
+
+class Status(enum.Enum):
+    DISPONIVEL = 0
+    EMPRESTADO = 1
+    VENDIDO = 2
+    TROCADO = 3
 
 
 class Endereco(db.Model):
@@ -72,9 +75,9 @@ class Endereco(db.Model):
     complemento = db.Column(db.String(100), nullable=False)
     latitude = db.Column(db.Float(), nullable=False)
     longetude = db.Column(db.Float(), nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('Usuario.id', ondelete='CASCADE'), nullable=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('Usuario.id'), nullable=True)
 
-    def __init__(self, estado, cidade, bairro, rua, numero, complemento, latitude, longetude, usuario_id):
+    def __init__(self, estado, cidade, bairro, rua, numero, complemento, latitude, longetude):
         self.estado = estado
         self.cidade = cidade
         self.bairro = bairro
@@ -83,7 +86,6 @@ class Endereco(db.Model):
         self.complemento = complemento
         self.latitude = latitude
         self.longetude = longetude
-        self.usuario_id = usuario_id
 
 
 class UsuarioSchema(ma.Schema):
@@ -94,12 +96,70 @@ class LivrosSchema(ma.Schema):
     class Meta:
         fields = ("id", "autor", "titulo", "editora", "preco", "status")
 
-class EnderecoSchema(ma.Schema):
-    class Meta:
-        fields = ("id", "estado", "cidade", "bairro", "rua", "numero", "complemento", "latitude", "logitude", "usuario_id")
+
+usuario_schema = UsuarioSchema()
+usuarios_schema = UsuarioSchema(many=True)
+livro_schema = LivrosSchema()
+livros_schema = LivrosSchema(many=True)
+
+@app.route("/addUsuario", methods=["POST"])
+def addUsuario():
+
+    novoUsuario = Usuario(
+        request.json['nome'],
+        request.json['sobrenome'],
+        request.json['email'],
+        request.json['senha'],
+        request.json['idade'],
+        request.json['cpfCnpj']
+    )
+
+    db.session.add(novoUsuario)
+    db.session.commit()
+    return jsonify({"status": "successful"})
+
+@app.route("/addLivro", methods=["POST"])
+def addLivro():
+
+    
+    novoLivro = Livro(
+        request.json['autor'],
+        request.json['titulo'],
+        request.json['editora'],
+        request.json['preco'],
+        0
+    )
+
+    db.session.add(novoLivro)
+    db.session.commit()
+
+    return jsonify({"status": "successful"})
 
 
-class UsuarioTemLivroSchema(ma.Schema):
-    class Meta:
-        fields = ("id", "usuario_id", "livro_id")
+@app.route("/getUsuarios", methods=["GET"])
+def getUsuarios():
+    usuarios = Usuario.query.all()
+    result = usuarios_schema.dump(usuarios)
+
+    return jsonify(result)
+
+@app.route("/login", methods=["POST"])
+def login():
+    email, senha = request.json["email"], request.json["senha"]
+
+    usuario = Usuario.query.filter_by(email=email).first()
+
+    print(usuario is None)
+
+@app.route("/getLivros", methods=["GET"])
+def getLivros():
+    livros = Livro.query.all()
+    result = livros_schema.dump(livros)
+
+    return jsonify(result)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
