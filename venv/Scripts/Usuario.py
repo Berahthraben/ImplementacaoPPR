@@ -10,7 +10,6 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 
 usuario_schema = UsuarioSchema()
-usuarios_schema = UsuarioSchema(many=True)
 
 class BancoUsuario:
     def addUsuario(request):
@@ -28,3 +27,10 @@ class BancoUsuario:
         db.session.close()
 
         return jsonify({"status": "successful"})
+
+    def login(request):
+        usuario = Usuario.query.filter_by(email=request.json["email"], senha=request.json["senha"]).first()
+
+        resultado = usuario_schema.dump(usuario)
+
+        return jsonify(resultado)

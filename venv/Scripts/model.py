@@ -88,7 +88,7 @@ class Endereco(db.Model):
 
 class UsuarioSchema(ma.Schema):
     class Meta:
-        fields = ("id", "nome", "sobrenome", "senha","email", "idade", "cpfCnpj")
+        fields = ("id", "nome", "sobrenome","email", "idade", "cpfCnpj")
 
 class LivrosSchema(ma.Schema):
     class Meta:
@@ -102,4 +102,3 @@ class EnderecoSchema(ma.Schema):
 class UsuarioTemLivroSchema(ma.Schema):
     class Meta:
         fields = ("id", "usuario_id", "livro_id")
-

@@ -10,7 +10,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
-<script type="text/javascript" src="../controller/login.js"></script>
+<script src="{{ url_for('static', filename='login.js') }}"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -41,7 +41,7 @@
     <div class="container-fluid" style="width: 56.25vh; height: 100vh; background-color: #8acfd9;">
         <div class="row">
             <div class="col-lg-12" style="width: 50%; margin-top: 40%">
-                <img src="book-and-pencil.png" style="width: 150px">
+                <img src="{{url_for('static', filename='book-and-pencil.png')}}" style="width: 150px">
             </div>
         </div>
         <div class="row">
