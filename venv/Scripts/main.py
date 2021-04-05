@@ -34,7 +34,6 @@ def addLivro():
 def getLivros():
     return BancoLivro.getLivros()
 
-
 @app.route("/emprestimo", methods=["POST"])
 def emprestarLivro():
     return BancoLivro.emprestarLivro(request=request)
@@ -53,6 +52,10 @@ def addEndereco():
 @app.route("/endereco/<int:id>", methods=["GET"])
 def getEnderecoUsuario(id):
     return BancoEndereco.getEnderecoUsuario(id)
+
+@app.route("/login", methods=["POST"])
+def login():
+    return BancoUsuario.login(request=request)
 
 
 @app.route("/login", methods=["POST"])
