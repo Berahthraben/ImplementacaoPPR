@@ -4,8 +4,6 @@ from flask import Flask, jsonify, request
 
 from model import Usuario, UsuarioSchema, Endereco
 
-from Endereco import BancoEndereco
-
 app = Flask(__name__)
 db = SQLAlchemy(app)
 

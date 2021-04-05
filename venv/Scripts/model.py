@@ -40,13 +40,15 @@ class Livro(db.Model):
     editora = db.Column(db.String(200), nullable=False)
     preco = db.Column(db.Float(), nullable=False)
     status = db.Column(db.Integer(), nullable=False)
-    usuario = db.relationship('UsuarioTemLivro', backref=db.backref('Livro',   lazy=True), passive_deletes=True)
+    descricao = db.Column(db.String(300), nullable=True)
+    usuario = db.relationship('UsuarioTemLivro', backref=db.backref('Livro',  lazy=True), passive_deletes=True)
 
-    def __init__(self, autor, titulo, editora, preco, status):
+    def __init__(self, autor, titulo, editora, preco, status, descricao):
         self.autor = autor
         self.titulo = titulo
         self.editora = editora
         self.preco = preco
+        self.descricao = descricao
         self.status = status
 
 
@@ -92,7 +94,7 @@ class UsuarioSchema(ma.Schema):
 
 class LivrosSchema(ma.Schema):
     class Meta:
-        fields = ("id", "autor", "titulo", "editora", "preco", "status")
+        fields = ("id", "autor", "titulo", "editora", "preco", "descricao", "status")
 
 class EnderecoSchema(ma.Schema):
     class Meta:

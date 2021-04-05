@@ -73,15 +73,15 @@
          <div class="barralateral" ng-hide="!mostrarSide" style="padding: 10px">
             <div class="row" style="height: 100px">
                 <div class="col-lg-6">
-                    <img class="icones" alt="" src="56763.png" style="margin-left: 15px" ng-click="mostrarSide = !mostrarSide">
+                    <img class="icones" alt="" src="{{url_for('static', filename='56763.png')}}" style="margin-left: 15px" ng-click="mostrarSide = !mostrarSide">
                 </div>
             </div>
-            <div class="row rowLinks">
+            <div class="row rowLinks" ng-click="redirecionar('/livros')">
                 <div class="col-md-12">
                     <Span>BIBLIOTECA GERAL</Span>
                 </div>
             </div>
-            <div class="row rowLinks">
+            <div class="row rowLinks" ng-click="redirecionar('/biblioteca')">
                 <div class="col-md-12">
                     <Span>MINHA BIBLIOTECA</Span>
                 </div>
@@ -94,13 +94,13 @@
         </div>
         <div class="row" style="background-color: rgba(10,18,57,1); height: 100px">
             <div class="col-lg-4">
-                <img class="icones" alt="" src="56763.png" style="margin-left: 15px" ng-click="mostrarSide = !mostrarSide">
+                <img class="icones" alt="" src="{{url_for('static', filename='56763.png')}}" style="margin-left: 15px" ng-click="mostrarSide = !mostrarSide">
             </div>
             <div class="col-lg-4" style="text-align: center; margin: auto; font-size: 30px; color: white">
                 <span>Minha Biblioteca</span>
             </div>
             <div class="col-lg-4">
-                <img class="icones" alt="" src="lupa.png" style="margin-right: 15px; right: 15px">
+                <img class="icones" alt="" src="{{url_for('static', filename='lupa.png')}}" style="margin-right: 15px; right: 15px">
             </div>
         </div>
         <div class="row" ng-repeat="livro in livros">
@@ -110,7 +110,7 @@
                 <div class="col-lg-12" style="height:100%">
                     <div class="row" style="height:100%">
                         <div class="col-lg-4" style="height:100%"> <!- row imagem>
-                            <img src="book-and-pencil.png" style="padding: 10px; height:100%">
+                            <img src="{{url_for('static', filename='book-and-pencil.png')}}" style="padding: 10px; height:100%">
                         </div>
                         <div class="col-lg-4"> <!- row titulo e genero>
                             <div class="row"
@@ -127,14 +127,14 @@
                             </div>
                         </div>
                         <div class="col-lg-4"> <!- row icone>
-                            <img src="share.png" style="width: 40%; margin-top: 20%">
+                            <img src="{{url_for('static', filename='share.png')}}" style="width: 40%; margin-top: 20%">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row" style="height: 150px; margin-left: auto; margin-right: auto; background-color: dodgerblue">
                 <div class="col-md-12" style="height: inherit">
-                    <img src="livro.jpg" style="max-width: 100%; max-height: 100%">
+                    <img src="{{url_for('static', filename='livro.jpg')}}" style="max-width: 100%; max-height: 100%">
                 </div>
             </div>
             <div class="row" style="height: 60px; text-align: center;">
@@ -150,7 +150,7 @@
                     <div class="col-lg-12" style="height:100%">
                         <div class="row" style="height:100%">
                             <div class="col-lg-4" style="height:100%"> <!- row imagem>
-                                <img src="book-and-pencil.png" style="padding: 10px; height:100%">
+                                <img src="{{url_for('static', filename='book-and-pencil.png')}}" style="padding: 10px; height:100%">
                             </div>
                             <div class="col-lg-4"> <!- row titulo e genero>
                                 <div class="row"
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4"> <!- row icone>
-                                <img src="share.png" style="width: 40%; margin-top: 20%">
+                                <img src="{{url_for('static', filename='share.png')}}" style="width: 40%; margin-top: 20%">
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                 <div class="row"
                      style="height: 150px; margin-left: auto; margin-right: auto; background-color: dodgerblue">
                     <div class="col-md-12" style="height: inherit">
-                        <img src="livro.jpg" style="max-width: 100%; max-height: 100%">
+                        <img src="{{url_for('static', filename='livro.jpg')}}" style="max-width: 100%; max-height: 100%">
                     </div>
                 </div>
                 <div class="row" style="height: 60px; text-align: center;">

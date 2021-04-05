@@ -1,5 +1,5 @@
 let app = angular.module('trabalho', []);
-app.controller('livros', function ($scope, $http) {
+app.controller('livros', function ($scope, $http, $window) {
     $scope.mostrarSide = false;
 
     $scope.livros = [
@@ -8,6 +8,9 @@ app.controller('livros', function ($scope, $http) {
         {nome: "Dias Ruins", descricao: "Um livro auto-confiante", genero: "Aventura"}
     ];
 
+    $scope.redirecionar = function(endereco){
+        $window.location.href = endereco;
+    }
 
 
 }).config(function($interpolateProvider) {

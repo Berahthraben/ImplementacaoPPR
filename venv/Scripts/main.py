@@ -7,7 +7,7 @@ from Livro import BancoLivro
 from Endereco import BancoEndereco
 from config import ConexaoServidor
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='./templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = ConexaoServidor().getConfig()
 db = SQLAlchemy(app)
 
@@ -17,7 +17,17 @@ def index():
     if request.method == 'POST':
         pass
     else:
-        return render_template("index.html")
+        return render_template("main.html")
+
+
+@app.route('/biblioteca', methods=["GET"])
+def biblioteca():
+    return render_template("bilbioteca.html")
+
+
+@app.route('/livros', methods=["GET"])
+def livros():
+    return render_template("livros.html")
 
 
 @app.route("/usuario", methods=["POST"])
@@ -53,13 +63,9 @@ def addEndereco():
 def getEnderecoUsuario(id):
     return BancoEndereco.getEnderecoUsuario(id)
 
-@app.route("/login", methods=["POST"])
-def login():
-    return BancoUsuario.login(request=request)
-
 
 @app.route("/login", methods=["POST"])
-def login():
+def logar():
     return BancoUsuario.login(request=request)
 
 
